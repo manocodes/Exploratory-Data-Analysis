@@ -18,13 +18,14 @@ NEI = inner_join(NEI, coalrel, by="SCC")
 results = NEI %>%
       filter(fips == "24510" | fips == "06037") %>%
       group_by(fips, year) %>%
-      summarise(sum = sum(Emissions))
+      summarise(sum = sum(Emissions)) %>%
+      mutate(city = ifelse(fips=="24510", "Baltimore", "Los Angeles"))
 
 ggplot(data=results, aes(x=year, y=sum)) + 
-      facet_grid(.~ fips) + 
+      facet_grid(.~ city) + 
       geom_line(size=1, alpha=.5, color="red") + 
       geom_point(color="red") + 
-      labs(x = "Year", y = "PM2.5 Emission", title = "Emission by City")
+      labs(x = "Year", y = "PM2.5 Emission", title = "PM2.5 Emission by City")
 
 ggsave(filename = "plot6.png")
 

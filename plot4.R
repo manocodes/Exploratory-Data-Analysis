@@ -23,7 +23,7 @@ results = NEI %>%
 ggplot(data=results, aes(x=year, y=sum)) + 
       geom_line(size=1, alpha=.5, color="red") + 
       geom_point(color="red") + 
-      labs(x = "Year", y = "PM2.5 Emission - KiloTons", title = "PM2.5 Emission by Coal")
+      labs(x = "Year", y = "PM2.5 Emission in KiloTons", title = "PM2.5 Emission by Coal")
 
 ggsave(filename = "plot4.png")
 
