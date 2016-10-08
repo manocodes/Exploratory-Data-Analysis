@@ -8,7 +8,7 @@ SCC <- readRDS("D:/git.repos/R-Repo/Data/Air Quality/exdataNEI_data/Source_Class
 NEI = readRDS("D:/git.repos/R-Repo/Data/Air Quality/exdataNEI_data/summarySCC_PM25.rds")
 
 #lets filter out coal related records
-coalrel = filter(SCC, Short.Name %like% 'Coal' | Short.Name %like% 'coal')
+coalrel = filter(SCC, Short.Name %like% 'Vehicle' | Short.Name %like% 'vehicle')
 
 #then lets join it to make a combined table..
 NEI = inner_join(NEI, coalrel, by="SCC")
@@ -16,14 +16,15 @@ NEI = inner_join(NEI, coalrel, by="SCC")
 #lets use dplyr to manipulate data, first filter date for Baltimore, then  group by year, 
 #then summarize - the sum of emmision by the year and then convert them to kilotons..
 results = NEI %>%
-      group_by(year) %>%
-      summarise(sum = sum(Emissions))%>%
-      mutate(sum = sum/1000)
+      filter(fips == "24510" | fips == "06037") %>%
+      group_by(fips, year) %>%
+      summarise(sum = sum(Emissions))
 
 ggplot(data=results, aes(x=year, y=sum)) + 
+      facet_grid(.~ fips) + 
       geom_line(size=1, alpha=.5, color="red") + 
       geom_point(color="red") + 
-      labs(x = "Year", y = "PM2.5 Emission - KiloTons", title = "PM2.5 Emission by Coal")
+      labs(x = "Year", y = "PM2.5 Emission", title = "Emission by City")
 
-ggsave(filename = "plot4.png")
+ggsave(filename = "plot6.png")
 
