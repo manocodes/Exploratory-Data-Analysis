@@ -23,7 +23,8 @@ results = NEI %>%
 
 ggplot(data=results, aes(x=year, y=sum)) + 
       geom_line(size=1, alpha=.5, color="red") + 
-      geom_point(color="red") + 
+      geom_point(color="red", size=2) + 
+      geom_smooth(method='lm',formula=y~x, color="grey") +
       labs(x = "Year", y = "PM2.5 Emission in KiloTons", title = "PM2.5 Emission by Vehicles in Baltimore")
 
 ggsave(filename = "plot5.png")

@@ -18,7 +18,8 @@ results = NEI %>%
 ggplot(data=results, aes(x=year, y=sum)) + 
       facet_grid(.~ type) + 
       geom_line(size=1, alpha=.5, color="red") + 
-      geom_point(color="red") + 
+      geom_point(color="red", size=2) + 
+      geom_smooth(method='lm',formula=y~x, color="gray50") +
       labs(x = "Year", y = "PM2.5 Emission", title = "Emission by Source Type")
 
 ggsave(filename = "plot3.png")
