@@ -24,5 +24,3 @@ ggplot(data=results, aes(x=year, y=sum)) +
       labs(x = "Year", y = "PM2.5 Emission", title = "Emission by Type")
 
 ggsave(filename = "plot3.png")
-
-#as we see we there there is a general up and down trend. 
