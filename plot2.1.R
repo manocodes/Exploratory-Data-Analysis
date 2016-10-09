@@ -14,3 +14,5 @@ results = NEI %>%
 ggplot(results, aes(x=factor(year))) + geom_bar()
 
 ggsave(filename = "plot2.1.png")
+
+#this chart is worng, because we need a computed sum, not a count..  

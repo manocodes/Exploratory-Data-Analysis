@@ -22,7 +22,7 @@ results = NEI %>%
       mutate(city = ifelse(fips=="24510", "Baltimore", "Los Angeles"))
 
 ggplot(data=results, aes(x=factor(year), y=sum, fill=city)) + 
-      geom_bar(stat = "identity", position="dodge") +
+      geom_bar(stat = "identity", position="dodge", width=0.9) +
       scale_fill_brewer(palette = "Pastel1") +
       labs(x = "Year", y = "PM2.5 Emission", title = "PM2.5 Emission by City")
 
