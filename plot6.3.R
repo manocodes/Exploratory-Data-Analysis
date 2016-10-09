@@ -21,10 +21,11 @@ results = NEI %>%
       summarise(sum = sum(Emissions)) %>%
       mutate(city = ifelse(fips=="24510", "Baltimore", "Los Angeles"))
 
-ggplot(data=results, aes(x=year, y=sum, fill=city)) + 
-      geom_line(aes(color=city), size = 2) + 
-      scale_fill_brewer(palette = "Pastel2") + 
+ggplot(data=results, aes(x=factor(year), y=sum, fill=city)) + 
+      geom_bar(stat = "identity", position="dodge") +
+      scale_fill_brewer(palette = "Pastel1") +
+      geom_text(aes(label=format(sum, digits=0)), vjust = 1, color= "white", position=position_dodge(.9), size=3) +
       labs(x = "Year", y = "PM2.5 Emission", title = "PM2.5 Emission by City")
 
-ggsave(filename = "plot6.2.png")
+ggsave(filename = "plot6.3.png")
 
