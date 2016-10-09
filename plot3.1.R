@@ -15,11 +15,8 @@ results = NEI %>%
 #Of the four types of sources indicated by the type 
 #(point, nonpoint, onroad, nonroad) variable, which of these four sources 
 #have seen decreases in emissions from 1999–2008 for Baltimore City? 
-ggplot(data=results, aes(x=year, y=sum)) + 
-      facet_grid(.~ type) + 
-      geom_line(size=1, alpha=.5, color="red") + 
-      geom_point(color="red", size=2) + 
-      geom_smooth(method='lm',formula=y~x, color="gray50") + 
+ggplot(data=results, aes(x=factor(year), y=sum, fill=type)) + 
+      geom_bar(position = "dodge", stat="identity") + 
       labs(x = "Year", y = "PM2.5 Emission", title = "Emission by Source Type")
 
-ggsave(filename = "plot3.png")
+ggsave(filename = "plot3.1.png")
